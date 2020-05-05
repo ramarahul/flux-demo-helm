@@ -1,21 +1,17 @@
+---
 apiVersion: helm.fluxcd.io/v1
 
 kind: HelmRelease
 
 metadata:
-
   name: hello-app
 
   annotations:
-
     fluxcd.io/automated: "true"
-
 spec:
-
   releaseName: hello-app
 
   chart:
-
     git: git@github.com:ramarahul/flux-demo-helm
 
     path: charts/hello-app-demo
@@ -23,13 +19,10 @@ spec:
     ref: master
 
   values:
-
     image:
-
-      repository: gcr.io/saas-brcm/hello-app:v1
+      repository: gcr.io/saas-brcm/hello-app:v4
 
     replicaCount: 1
 
     hpa:
-
       enabled: false
