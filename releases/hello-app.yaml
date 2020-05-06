@@ -21,7 +21,7 @@ spec:
 
   values:
     image:
-      repository: gcr.io/saas-brcm/hello-app:v2
+      repository: gcr.io/saas-brcm/hello-app:v4
 
     replicaCount: 1
 
