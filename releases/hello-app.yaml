@@ -5,6 +5,7 @@ kind: HelmRelease
 
 metadata:
   name: hello-app
+  namespace: dev
 
   annotations:
     fluxcd.io/automated: "true"
