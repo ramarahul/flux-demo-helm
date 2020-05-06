@@ -14,7 +14,7 @@ spec:
     ref: master
   values:
     image:
-      repository: gcr.io/saas-brcm/hello-app:v1
+      repository: gcr.io/saas-brcm/hello-app:v4
     replicaCount: 1
     hpa:
       enabled: false
