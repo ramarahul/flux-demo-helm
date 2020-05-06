@@ -15,7 +15,7 @@ spec:
   values:
     image:
       repository: gcr.io/saas-brcm/hello-app
-      tag: v4
+      tag: v5
     replicaCount: 1
     hpa:
       enabled: false
