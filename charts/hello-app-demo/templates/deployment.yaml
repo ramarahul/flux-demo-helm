@@ -1,44 +1,25 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "hello-app-chart.fullname" . }}
+  name: helloweb
   labels:
-{{ include "hello-app-chart.labels" . | indent 4 }}
+    app: hello
+  annotations:
+    fluxcd.io/automated: "true"
 spec:
-  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "hello-app-chart.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      app: hello
+      tier: web
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "hello-app-chart.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+        app: hello
+        tier: web
     spec:
-    {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-    {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
+      - name: hello-app
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 8080
